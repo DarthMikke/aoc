@@ -24,9 +24,11 @@ printf "\n"
 
 let states = List.fold applyRotations [ initial ] rotations
 
-let printDelta (delta: int) (state: int) = printfn "%d\t%d" state delta
-
-// rotations |> List.append [ 0 ] |> Seq.iter2 printDelta states
+if rotations.Length > 20 then
+    printfn "Too see state at every rotation, pass at most 20 rotations."
+else
+    let printDelta (delta: int) (state: int) = printfn "%d\t%d" state delta
+    rotations |> List.append [ 0 ] |> Seq.iter2 printDelta states
 
 let zeroes = List.filter isZero states
 
