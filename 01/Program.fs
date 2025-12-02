@@ -2,7 +2,7 @@
 
 open Parse
 
-let applyRotations (previousRotations: List<int>) (value: int) : List<int> = // start + sumOf rotations
+let addRotation (previousRotations: List<int>) (value: int) : List<int> = // start + sumOf rotations
     let newValue = (List.last previousRotations + value) % 100
     List.append previousRotations [ newValue ]
 
@@ -22,7 +22,7 @@ let initial = 50
 printfn "Initial state: %d" initial
 printf "\n"
 
-let states = List.fold applyRotations [ initial ] rotations
+let states = List.fold addRotation [ initial ] rotations
 
 if rotations.Length > 20 then
     printfn "Too see state at every rotation, pass at most 20 rotations."
