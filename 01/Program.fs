@@ -32,7 +32,7 @@ let states = List.fold addRotation [ (initial, 0) ] rotations
 if rotations.Length > 20 then
     printfn "Too see state at every rotation, pass at most 20 rotations."
 else
-    let printDelta (delta, _: int) (state, _: int) = printfn "%d\t%d" state delta
+    let printDelta (delta, turns: int) (state, _: int) = printfn "%d\t%d\t%d" state delta turns
 
     List.iter2 printDelta states (rotationsWithPassingOfNorth |> List.append [ (0, 0) ])
 
