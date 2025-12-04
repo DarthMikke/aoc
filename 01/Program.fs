@@ -3,6 +3,8 @@
 open Parse
 open PassingNorth
 
+let isZero (n: int, _: int) = n = 0
+
 let addRotation (previousRotations: List<int * int>) (value: int) : List<int * int> = // start + sumOf rotations
     let lastState, _ = previousRotations |> List.last
     let newValue = (lastState + value) % 100
@@ -17,9 +19,8 @@ let rotations =
 
 let rotationsWithPassingOfNorth = rotations |> List.map (fun (x: int) -> x, 0)
 
-let isZero (n: int, _: int) = n = 0
 
-
+// main code block below
 
 let initial = 50
 
@@ -33,14 +34,17 @@ if rotations.Length > 20 then
 else
     let printDelta (delta, _: int) (state, _: int) = printfn "%d\t%d" state delta
 
-    rotationsWithPassingOfNorth
-    |> List.append [ (0, 0) ]
-    |> List.iter2 printDelta states
+    List.iter2 printDelta states (rotationsWithPassingOfNorth |> List.append [ (0, 0) ])
 
 let zeroes = List.filter isZero states
 
-printfn "Counted %A zeroes" zeroes.Length
+printfn
+    "Counted:
+%A zeroes
+%A passings of zero"
+    zeroes.Length
+    0
 
-let passinggsOfNorth = rotations
+let passingsOfNorth = rotations
 
 let passingNorth = List.fold (fun (a: int) (b: int) -> a + b) 50 rotations
