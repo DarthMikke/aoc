@@ -15,7 +15,7 @@ printfn "Opening %s" filename
 let rotations =
     filename |> System.IO.File.ReadAllLines |> Seq.toList |> deltasFromRotations
 
-let rotationsWithFullTurns = rotations |> Seq.map (fun (x: int) -> x, 0)
+let rotationsWithPassingOfNorth = rotations |> List.map (fun (x: int) -> x, 0)
 
 let isZero (n: int, _: int) = n = 0
 
@@ -31,8 +31,11 @@ let states = List.fold addRotation [ (initial, 0) ] rotations
 if rotations.Length > 20 then
     printfn "Too see state at every rotation, pass at most 20 rotations."
 else
-    let printDelta (delta: int) (state: int) = printfn "%d\t%d" state delta
-    rotationsWithFullTurns |> List.append [ (0, 0) ] |> Seq.iter2 printDelta states
+    let printDelta (delta, _: int) (state, _: int) = printfn "%d\t%d" state delta
+
+    rotationsWithPassingOfNorth
+    |> List.append [ (0, 0) ]
+    |> List.iter2 printDelta states
 
 let zeroes = List.filter isZero states
 
