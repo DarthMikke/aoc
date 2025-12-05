@@ -9,7 +9,12 @@
   <ItemGroup>
     <Compile Include="Parse.fs" />
     <Compile Include="PassingNorth.fs" />
+    <Compile Include="check.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsCheck" Version="3.3.2" />
   </ItemGroup>
 
 </Project>
